@@ -1,13 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'lib/hangman'
+require_relative 'lib/executioner'
 
-length = 5
-hm = Hangman.new(length)
-puts hm
-
-8.times do |_|
-  hm.guessed_word[rand(5)] = 'e'
-  hm.wrong_letters << 'p'
-  puts hm
-end
+10.times { |_| p Executioner.new }
