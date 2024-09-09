@@ -24,6 +24,10 @@ class Hangman
     @wrong_letters = []
   end
 
+  def serialize
+    'game state'
+  end
+
   def to_s
     "\n#{print_wrong_letters}\n#{print_guessed_word}\n#{draw_hangman}\n#{print_mistakes_left}\n\n"
   end
