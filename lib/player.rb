@@ -30,7 +30,7 @@ class Player
     puts 'Enter the file name for your save. E.g. my_game2'
     puts 'Input repeats until valid (a-z, A-Z, 0-9, _)'
     file_name = gets.chomp until file_name && valid_name?(file_name)
-    file_path = "./game_saves/#{file_name}.txt"
+    file_path = "./game_saves/#{file_name}.json"
     File.open(file_path, 'w') { |file| file.puts hangman.serialize } if proceed_save?(file_path)
   end
 
