@@ -8,10 +8,10 @@ class Player
 
   private_constant :VALID_INPUT, :VALID_FILE_NAME_CHARS, :VALID_YES_NO
 
-  def user_input(hangman)
+  def user_input(game)
     input = receive_input
     while input == 'save'
-      save(hangman)
+      save(game)
       input = receive_input
     end
     input
@@ -26,12 +26,12 @@ class Player
     input
   end
 
-  def save(hangman)
+  def save(game)
     puts 'Enter the file name for your save. E.g. my_game2'
     puts 'Input repeats until valid (a-z, A-Z, 0-9, _)'
     file_name = gets.chomp until file_name && valid_name?(file_name)
     file_path = "./game_saves/#{file_name}.json"
-    File.open(file_path, 'w') { |file| file.puts hangman.serialize } if proceed_save?(file_path)
+    File.open(file_path, 'w') { |file| file.puts game.serialize } if proceed_save?(file_path)
   end
 
   def proceed_save?(file_path)

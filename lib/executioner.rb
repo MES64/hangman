@@ -16,6 +16,10 @@ class Executioner
     @word = select_word
   end
 
+  def serialize
+    JSON.dump({ word: @word })
+  end
+
   def update_hangman(hangman, guess)
     if @word.include?(guess)
       @word.each_with_index { |letter, idx| hangman.guessed_word[idx] = guess if guess == letter }

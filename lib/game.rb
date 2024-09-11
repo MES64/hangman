@@ -15,6 +15,14 @@ class Game
     @result = nil
   end
 
+  def serialize
+    JSON.dump({
+                executioner: @executioner.serialize,
+                hangman: @hangman.serialize,
+                result: @result
+              })
+  end
+
   def play
     puts @hangman
     play_turn while @result.nil?
@@ -25,7 +33,7 @@ class Game
   private
 
   def play_turn
-    guess = @player.user_input(@hangman)
+    guess = @player.user_input(self)
     @executioner.update_hangman(@hangman, guess)
     puts @hangman
     check_game_over
