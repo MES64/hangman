@@ -4,32 +4,43 @@
 class Player
   VALID_INPUT = (('a'..'z').to_a << 'save').freeze
   VALID_FILE_NAME_CHARS = (('a'..'z').to_a.concat(('A'..'Z').to_a, ('0'..'9').to_a) << '_').freeze
+  VALID_YES_NO = %w[y n].freeze
 
-  attr_reader :input
-
-  def initialize
-    @input = nil
-  end
+  private_constant :VALID_INPUT, :VALID_FILE_NAME_CHARS, :VALID_YES_NO
 
   def user_input(hangman)
-    @input = nil
-    puts 'Enter your letter guess. To save the game type: save'
-    save(hangman) while recieve_input == 'save'
+    input = recieve_input
+    while input == 'save'
+      save(hangman)
+      input = recieve_input
+    end
+    input
   end
 
   private
 
   def recieve_input
-    @input = gets.chomp.downcase until @input && VALID_INPUT.include?(input)
-    @input
+    puts 'Enter your letter guess. To save the game type: save'
+    puts 'Input repeats until valid (a-z, A-Z, save)'
+    input = gets.chomp.downcase until input && VALID_INPUT.include?(input)
+    input
   end
 
   def save(hangman)
-    puts "Enter the file name for your save. E.g. my_game2\nInput repeats until valid (a-z, A-Z, 0-9, _)"
+    puts 'Enter the file name for your save. E.g. my_game2'
+    puts 'Input repeats until valid (a-z, A-Z, 0-9, _)'
     file_name = gets.chomp until file_name && valid_name?(file_name)
     file_path = "./game_saves/#{file_name}.txt"
-    # Maybe check for existing name and ask if want to overwrite
-    File.open(file_path, 'w') { |file| file.puts hangman.serialize }
+    File.open(file_path, 'w') { |file| file.puts hangman.serialize } if proceed_save?(file_path)
+  end
+
+  def proceed_save?(file_path)
+    return true unless File.exist?(file_path)
+
+    puts 'This file already exists. Overwrite?'
+    puts 'Input repeats until valid (y/n)'
+    save_decision = gets.chomp.downcase until save_decision && VALID_YES_NO.include?(save_decision)
+    save_decision == 'y'
   end
 
   def valid_name?(file_name)

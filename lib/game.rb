@@ -24,8 +24,8 @@ class Game
   private
 
   def play_turn
-    @player.user_input(@hangman)
-    @executioner.update_hangman(@hangman, @player.input)
+    guess = @player.user_input(@hangman)
+    @executioner.update_hangman(@hangman, guess)
     puts @hangman
     check_game_over
   end
