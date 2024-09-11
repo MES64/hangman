@@ -1,1 +1,1 @@
-game state
+{"guessed_word":[" ","a"," "," "," ","i"," "," ","e"],"wrong_letters":["q","t","w","y"]}
