@@ -10,6 +10,8 @@ class Executioner
 
   private_constant :MIN_WORD_LENGTH, :MAX_WORD_LENGTH, :DICT_FILE_PATH
 
+  attr_reader :word
+
   def initialize
     @word = select_word
   end
