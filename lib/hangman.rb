@@ -4,7 +4,6 @@
 # Methods include to_s, and methods to update the word so far and the incorrect letters
 # Constants used are the maximum mmistakes allowed and the draw order for the hangman drawing
 class Hangman
-  MAX_MISTAKES = 8
   DRAW_ORDER = [
     { char: 'o', row: 2, col: 4 },
     { char: '|', row: 3, col: 4 },
@@ -15,13 +14,14 @@ class Hangman
     { char: '|', row: 1, col: 4 }
   ].freeze
 
-  private_constant :MAX_MISTAKES, :DRAW_ORDER
+  private_constant :DRAW_ORDER
 
   attr_accessor :guessed_word, :wrong_letters
 
-  def initialize(word_length)
+  def initialize(word_length, max_mistakes)
     @guessed_word = Array.new(word_length, ' ')
     @wrong_letters = []
+    @max_mistakes = max_mistakes
   end
 
   def serialize
@@ -43,7 +43,7 @@ class Hangman
   end
 
   def print_mistakes_left
-    "#{MAX_MISTAKES - @wrong_letters.length} mistakes left!"
+    "#{@max_mistakes - @wrong_letters.length} mistakes left!"
   end
 
   def draw_hangman
