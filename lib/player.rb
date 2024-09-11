@@ -9,17 +9,17 @@ class Player
   private_constant :VALID_INPUT, :VALID_FILE_NAME_CHARS, :VALID_YES_NO
 
   def user_input(hangman)
-    input = recieve_input
+    input = receive_input
     while input == 'save'
       save(hangman)
-      input = recieve_input
+      input = receive_input
     end
     input
   end
 
   private
 
-  def recieve_input
+  def receive_input
     puts 'Enter your letter guess. To save the game type: save'
     puts 'Input repeats until valid (a-z, A-Z, save)'
     input = gets.chomp.downcase until input && VALID_INPUT.include?(input)
