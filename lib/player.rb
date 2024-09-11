@@ -17,6 +17,21 @@ class Player
     input
   end
 
+  def load_game
+    return unless want_load?
+
+    file_path = input_file_path
+    begin
+      File.open(file_path, 'r') { |file| file.gets.chomp }
+    rescue SystemCallError
+      puts 'File could not be found...'
+      if want_load?
+        file_path = input_file_path
+        retry
+      end
+    end
+  end
+
   private
 
   def receive_input
@@ -45,5 +60,19 @@ class Player
 
   def valid_name?(file_name)
     file_name.chars.all? { |char| VALID_FILE_NAME_CHARS.include?(char) }
+  end
+
+  def want_load?
+    puts 'Do you want to load a saved game?'
+    puts 'Input repeats until valid (y/n)'
+    load_decision = gets.chomp.downcase until load_decision && VALID_YES_NO.include?(load_decision)
+    load_decision == 'y'
+  end
+
+  def input_file_path
+    puts 'Enter the file name for your game. E.g. my_game2'
+    puts 'Input repeats until valid (a-z, A-Z, 0-9, _)'
+    file_name = gets.chomp until file_name && valid_name?(file_name)
+    "./game_saves/#{file_name}.json"
   end
 end

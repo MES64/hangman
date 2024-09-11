@@ -10,6 +10,7 @@ class Game
 
   def initialize
     @player = Player.new
+    p @player.load_game
     @executioner = Executioner.new
     @hangman = Hangman.new(@executioner.word_length, MAX_MISTAKES)
     @result = nil
