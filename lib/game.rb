@@ -28,7 +28,7 @@ class Game
     puts @hangman
     play_turn while @result.nil?
     puts @result
-    puts "The word is: #{@executioner.word.join}"
+    puts "The word is: #{@executioner}"
   end
 
   private

@@ -37,6 +37,10 @@ class Executioner
     @word.length
   end
 
+  def to_s
+    @word.join
+  end
+
   private
 
   def select_word
