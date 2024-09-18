@@ -19,8 +19,7 @@ class Game
   def serialize
     JSON.dump({
                 executioner: @executioner.serialize,
-                hangman: @hangman.serialize,
-                result: @result
+                hangman: @hangman.serialize
               })
   end
 
@@ -42,7 +41,6 @@ class Game
     game_hash = JSON.parse(loaded_game)
     @executioner.deserialize(game_hash['executioner'])
     @hangman.deserialize(game_hash['hangman'])
-    @result = game_hash['result']
   end
 
   def play_turn
