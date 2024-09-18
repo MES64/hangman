@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 # Player can input either a letter guess or to save
+# It also has a method for loading a saved game
+# Constants are used for validating input
 class Player
   VALID_INPUT = (('a'..'z').to_a << 'save').freeze
   VALID_FILE_NAME_CHARS = (('a'..'z').to_a.concat(('A'..'Z').to_a, ('0'..'9').to_a) << '_').freeze

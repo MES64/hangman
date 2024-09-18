@@ -2,7 +2,8 @@
 
 # Hangman stores information about the 'paper' game state: the word so far and incorrect letters
 # Methods include to_s, and methods to update the word so far and the incorrect letters
-# Constants used are the maximum mmistakes allowed and the draw order for the hangman drawing
+# Has serialize and deserialize methods for saving and loading games
+# Constant used is the draw order for the hangman drawing
 class Hangman
   DRAW_ORDER = [
     { char: 'o', row: 2, col: 4 },

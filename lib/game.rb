@@ -5,8 +5,13 @@ require_relative 'executioner'
 require_relative 'hangman'
 
 # Game holds info about the player, the executioner, the hangman, and the result
+# Has a method for playing the game
+# Has serialize and deserialize methods for saving and loading games
+# Constant used is the maximum mistakes allowed
 class Game
   MAX_MISTAKES = 8
+
+  private_constant :MAX_MISTAKES
 
   def initialize
     @player = Player.new
