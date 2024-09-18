@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'json'
-
 # Hangman stores information about the 'paper' game state: the word so far and incorrect letters
 # Methods include to_s, and methods to update the word so far and the incorrect letters
 # Constants used are the maximum mmistakes allowed and the draw order for the hangman drawing
@@ -31,6 +29,12 @@ class Hangman
                 guessed_word: @guessed_word,
                 wrong_letters: @wrong_letters
               })
+  end
+
+  def deserialize(hangman_data)
+    hangman_hash = JSON.parse(hangman_data)
+    @guessed_word = hangman_hash['guessed_word']
+    @wrong_letters = hangman_hash['wrong_letters']
   end
 
   def to_s

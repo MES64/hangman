@@ -10,10 +10,10 @@ class Game
 
   def initialize
     @player = Player.new
-    p @player.load_game
     @executioner = Executioner.new
     @hangman = Hangman.new(@executioner.word_length, MAX_MISTAKES)
     @result = nil
+    init_game
   end
 
   def serialize
@@ -32,6 +32,18 @@ class Game
   end
 
   private
+
+  def init_game
+    loaded_game = @player.load_game
+    deserialize(loaded_game) unless loaded_game.nil?
+  end
+
+  def deserialize(loaded_game)
+    game_hash = JSON.parse(loaded_game)
+    @executioner.deserialize(game_hash['executioner'])
+    @hangman.deserialize(game_hash['hangman'])
+    @result = game_hash['result']
+  end
 
   def play_turn
     guess = @player.user_input(self)

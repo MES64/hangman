@@ -20,6 +20,11 @@ class Executioner
     JSON.dump({ word: @word })
   end
 
+  def deserialize(executioner_data)
+    executioner_hash = JSON.parse(executioner_data)
+    @word = executioner_hash['word']
+  end
+
   def update_hangman(hangman, guess)
     if @word.include?(guess)
       @word.each_with_index { |letter, idx| hangman.guessed_word[idx] = guess if guess == letter }
